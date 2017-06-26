@@ -1,0 +1,6 @@
+git add * = comando que diz para o git reconhecer novos arquivos na pasta. 
+git status = mostra o que ta acontecendo no repositório (que é pasta etapas).
+git commit -am 'mensagem do commit' = representa que voce fez alterações nos arquivos.
+git push -u origin master = manda as alterações que fiz para nosso repositório
+git pull = puxa todas alterações que foram feitas no repositório remoto
+git clone https://github.com/grupocompiladores/etapas.git = quando voce ver que o pull deu uma mensagem de merge ou algo diferente, voce clona de novo o repositório
