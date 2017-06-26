@@ -76,7 +76,7 @@ public class Sintatico {
 		if (isClasseEsperada(Tag.KW_CLASS)){
 			prodClasse();
 			
-			if(!eat(Tag.EOF)){
+			if(!eat(Tag.EOF)) {
 				erroSintatico("Esperado fim de arquivo, porem encontrado '" + token.getLexema() + "'");
 			}
 			System.out.println();
@@ -106,9 +106,7 @@ public class Sintatico {
 				erroSintatico("Esperado '.', porem encontrado '" + token.getLexema() + "'");
 			}
 		}
-		
-		
-	}
+}
 	
 	//ListaFuncao -> ListaFuncaoLinha
 	public void prodListaFuncao() {
@@ -128,13 +126,68 @@ public class Sintatico {
 		if(!eat(Tag.KW_DEF)){
 			erroSintatico("Esperado 'def', porem encontrado '" + token.getLexema() + "'");
 		}
+		prodTipoMacro();
 		
 	}
 	
+	private void prodTipoMacro() {
+		
+		
+	}
+
 	public void prodMain(){
+		if(!eat(Tag.KW_DEFSTATIC)){
+			erroSintatico("Esperado 'defstatic', porem encontrado '" + token.getLexema() + "'");
+		}
+		if(!eat(Tag.KW_VOID)){
+			erroSintatico("Esperado 'void', porem encontrado '" + token.getLexema() + "'");
+		}
+		if(!eat(Tag.KW_MAIN)){
+			erroSintatico("Esperado 'main', porem encontrado '" + token.getLexema() + "'");
+		}
+		if(!eat(Tag.SMB_ABREPAR)){
+			erroSintatico("Esperado '(', porem encontrado '" + token.getLexema() + "'");
+		}
+		if(!eat(Tag.KW_STRING)){
+			erroSintatico("Esperado 'String', porem encontrado '" + token.getLexema() + "'");
+		}
+		if(!eat(Tag.SMB_ABRECOL)){
+			erroSintatico("Esperado '[', porem encontrado '" + token.getLexema() + "'");
+		}
+		if(!eat(Tag.SMB_FECHACOL)){
+			erroSintatico("Esperado ']', porem encontrado '" + token.getLexema() + "'");
+		}
+		if(!eat(Tag.ID)){
+			erroSintatico("Esperado 'ID', porem encontrado '" + token.getLexema() + "'");
+		}
+		if(!eat(Tag.SMB_FECHAPAR)){
+			erroSintatico("Esperado ')', porem encontrado '" + token.getLexema() + "'");
+		}
+		if(!eat(Tag.SMB_DOISPONTOS)){
+			erroSintatico("Esperado ':', porem encontrado '" + token.getLexema() + "'");
+		}
+		prodFDID();
+		prodListCmd();
+		if(!eat(Tag.KW_END)){
+			erroSintatico("Esperado 'end', porem encontrado '" + token.getLexema() + "'");
+		}
+		if(!eat(Tag.SMB_PONTOVIRGULA)){
+			erroSintatico("Esperado ';', porem encontrado '" + token.getLexema() + "'");
+		}
+		
 		
 	}
 	
+	private void prodListCmd() {
+		
+		
+	}
+
+	public void prodFDID() {
+		
+		
+	}
+
 	public void prodTipoPrimitivo(){
 		if(!eat(Tag.KW_BOOL) || !eat(Tag.KW_INTEGER) || !eat(Tag.KW_STRING) || !eat(Tag.KW_DOUBLE) || !eat(Tag.KW_VOID) ){
 			erroSintatico("Esperado 'bool/integer/String/double/void', porem encontrado '" + token.getLexema() + "'");
