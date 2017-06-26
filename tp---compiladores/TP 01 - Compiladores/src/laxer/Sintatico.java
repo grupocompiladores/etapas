@@ -71,42 +71,42 @@ public class Sintatico {
 
 	//-------------------------------------PRODUCOES COMEÇAM AQUI-------------------------------------------------
 	public void prodPrograma(){
-		advance();
+		advance(); //pega o primeiro token para inicio do processamento
 		
 		if (isClasseEsperada(Tag.KW_CLASS)){
 			prodClasse();
 			
 			if(!eat(Tag.EOF)) {
-				erroSintatico("Esperado fim de arquivo, porem encontrado '" + token.getLexema() + "'");
+				erroSintatico("Esperado fim de arquivo, encontrado '" + token.getLexema() + "'");
 			}
 			System.out.println();
 			
 		} else{
-			erroSintatico("Esperado 'class', porem encontrado '" + token.getLexema() + "'");
+			erroSintatico("Esperado 'class', encontrado '" + token.getLexema() + "'");
 		}
 	}
 	
 	public void prodClasse() {
 		if (!eat(Tag.KW_CLASS)){
-			erroSintatico("Esperado 'class', porem encontrado '" + token.getLexema() + "'");
+			erroSintatico("Esperado 'class', encontrado '" + token.getLexema() + "'");
 		}
-		if(!eat(Tag.ID)){
-			erroSintatico("Esperado um ID, porem encontrado '" + token.getLexema() + "'");
+		if(!eat(Tag.ID)) {
+			erroSintatico("Esperado um ID, encontrado '" + token.getLexema() + "'");
 		}
 		if(!eat(Tag.SMB_DOISPONTOS)){
-			erroSintatico("Esperado ':', porem encontrado '" + token.getLexema() + "'");
+			erroSintatico("Esperado ':', encontrado '" + token.getLexema() + "'");
 		} else {
 			prodListaFuncao();
 			prodMain();
 			
 			if(!eat(Tag.KW_END)){
-				erroSintatico("Esperado 'end', porem encontrado '" + token.getLexema() + "'");
+				erroSintatico("Esperado 'end', encontrado '" + token.getLexema() + "'");
 			}
 			if(!eat(Tag.SMB_PONTO)){
-				erroSintatico("Esperado '.', porem encontrado '" + token.getLexema() + "'");
+				erroSintatico("Esperado '.', encontrado '" + token.getLexema() + "'");
 			}
 		}
-}
+	}
 	
 	//ListaFuncao -> ListaFuncaoLinha
 	public void prodListaFuncao() {
@@ -119,31 +119,48 @@ public class Sintatico {
 		if(isClasseEsperada(Tag.KW_DEF)){
 			prodFuncao();
 		} 
-		//FIRST de prodListaFuncaoLinha() é o FIRST de prodFuncao() ou &
+		
 	}
 	
 	public void prodFuncao() {
 		if(!eat(Tag.KW_DEF)){
-			erroSintatico("Esperado 'def', porem encontrado '" + token.getLexema() + "'");
+			erroSintatico("Esperado 'def', encontrado '" + token.getLexema() + "'");
 		}
 		prodTipoMacro();
+		
 		
 	}
 	
 	private void prodTipoMacro() {
+		if(isClasseEsperada(Tag.KW_BOOL) || isClasseEsperada(Tag.KW_INTEGER) || isClasseEsperada(Tag.KW_STRING) || 
+		   isClasseEsperada(Tag.KW_DOUBLE) || isClasseEsperada(Tag.KW_VOID)) {
+			prodTipoPrimitivo();
+		} else
+			erroSintatico("Esperado 'bool/integer/String/double/void', encontrado '" + token.getLexema() + "'");
 		
-		
+		if(isClasseEsperada(Tag.SMB_ABRECOL)){
+			prodTipoMacroLinha();
+		}
+	}
+	
+	private void prodTipoMacroLinha(){
+		if(!eat(Tag.SMB_ABRECOL)){
+			erroSintatico("Esperado '[', encontrado '" + token.getLexema() + "'");
+		}
+		if(!eat(Tag.SMB_FECHACOL)){
+			erroSintatico("Esperado ']', encontrado '" + token.getLexema() + "'");
+		}
 	}
 
 	public void prodMain(){
 		if(!eat(Tag.KW_DEFSTATIC)){
-			erroSintatico("Esperado 'defstatic', porem encontrado '" + token.getLexema() + "'");
+			erroSintatico("Esperado 'defstatic', encontrado '" + token.getLexema() + "'");
 		}
 		if(!eat(Tag.KW_VOID)){
-			erroSintatico("Esperado 'void', porem encontrado '" + token.getLexema() + "'");
+			erroSintatico("Esperado 'void', encontrado '" + token.getLexema() + "'");
 		}
 		if(!eat(Tag.KW_MAIN)){
-			erroSintatico("Esperado 'main', porem encontrado '" + token.getLexema() + "'");
+			erroSintatico("Esperado 'main', encontrado '" + token.getLexema() + "'");
 		}
 		if(!eat(Tag.SMB_ABREPAR)){
 			erroSintatico("Esperado '(', porem encontrado '" + token.getLexema() + "'");
@@ -188,9 +205,9 @@ public class Sintatico {
 		
 	}
 
-	public void prodTipoPrimitivo(){
+	public void prodTipoPrimitivo() {
 		if(!eat(Tag.KW_BOOL) || !eat(Tag.KW_INTEGER) || !eat(Tag.KW_STRING) || !eat(Tag.KW_DOUBLE) || !eat(Tag.KW_VOID) ){
-			erroSintatico("Esperado 'bool/integer/String/double/void', porem encontrado '" + token.getLexema() + "'");
+			erroSintatico("Esperado 'bool/integer/String/double/void', encontrado '" + token.getLexema() + "'");
 		}
 	}
 	
