@@ -190,7 +190,7 @@ public class TS {
 			case "[":
 				return Tag.SMB_ABRECOL;
 			case "]":
-				return Tag.SMB_FECHAPAR;
+				return Tag.SMB_FECHACOL;
 			case "=":
 				return Tag.SMB_IGUAL;
 			

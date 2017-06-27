@@ -1,1 +1,1 @@
-class ID : defstatic void main (String [] ID) : 
+class ID [ ad af grg 
