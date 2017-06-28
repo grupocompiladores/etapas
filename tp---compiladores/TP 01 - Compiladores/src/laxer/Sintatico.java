@@ -67,27 +67,44 @@ public class Sintatico {
 	}
 	
 	//antigo isToken();
-	public boolean isClasseEsperada(Tag classe) {
+	public boolean isTokenEsperado(Tag classe) {
 		return token.getClasse() == classe;
 	}
 
 	//-------------------------------------PRODUCOES COMEÇAM AQUI-------------------------------------------------
 	public void prodPrograma(){
-				
-		while(errosSintaticos <= MAX_ERROS) {
-			advance();
-			
-			if(isClasseEsperada(Tag.KW_CLASS)){
-				prodClasse();
-				if(!eat(Tag.EOF)){
-					erroSintatico("Esperado 'fim de arquivo', encontrado '" + token.getLexema() + "'");
-				}
-				break;
-			} else {
-				erroSintatico("Esperado 'class', encontrado '" + token.getLexema() + "'");
-				errosSintaticos++;
-			}
-		}
+		advance();
+		
+//		if(token.getClasse() == TP.getFirst("prodClasse")){
+//			prodClasse();
+//		} else {
+//			while(errosSintaticos <= 5){
+//				erroSintatico("esperado 'class', veio " + token.getLexema());
+//				errosSintaticos++;
+//				
+//				if(token.getClasse() == TP.getFollow("prodClasse")){
+//					if( ! produzVazio("prodClasse")){
+//						synch(); //reporto erro pois deveria ter entrado nessa produção.
+//					}	
+//				}
+//			}
+//		}
+		
+		
+//		while(errosSintaticos <= MAX_ERROS) {
+//			advance();
+//			
+//			if(isTokenEsperado(Tag.KW_CLASS)){
+//				prodClasse();
+//				if(!eat(Tag.EOF)){
+//					erroSintatico("Esperado 'fim de arquivo', encontrado '" + token.getLexema() + "'");
+//				}
+//				break;
+//			} else {
+//				erroSintatico("Esperado 'class', encontrado '" + token.getLexema() + "'");
+//				errosSintaticos++;
+//			}
+//		}
 	}
 	
 	public void prodClasse() {
@@ -114,13 +131,13 @@ public class Sintatico {
 	
 	//ListaFuncao -> ListaFuncaoLinha
 	public void prodListaFuncao() {
-		if(isClasseEsperada(Tag.KW_DEF)){
+		if(isTokenEsperado(Tag.KW_DEF)){
 			prodListaFuncaoLinha();
 		} 
 	}
 	
 	public void prodListaFuncaoLinha(){
-		if(isClasseEsperada(Tag.KW_DEF)){
+		if(isTokenEsperado(Tag.KW_DEF)){
 			prodFuncao();
 			prodListaFuncaoLinha();
 		} 
@@ -170,7 +187,7 @@ public class Sintatico {
 	
 	public void prodFuncao() {
 		
-		if(isClasseEsperada(Tag.KW_DEF)){
+		if(isTokenEsperado(Tag.KW_DEF)){
 			eat(Tag.KW_DEF);
 			prodTipoMacro();
 			if(!eat(Tag.ID)){
@@ -216,8 +233,8 @@ public class Sintatico {
 	}
 
 	private void prodListaArg() {
-		if(isClasseEsperada(Tag.KW_BOOL) || isClasseEsperada(Tag.KW_INTEGER) || isClasseEsperada(Tag.KW_STRING) || 
-		   isClasseEsperada(Tag.KW_DOUBLE) || isClasseEsperada(Tag.KW_VOID)){
+		if(isTokenEsperado(Tag.KW_BOOL) || isTokenEsperado(Tag.KW_INTEGER) || isTokenEsperado(Tag.KW_STRING) || 
+		   isTokenEsperado(Tag.KW_DOUBLE) || isTokenEsperado(Tag.KW_VOID)){
 			
 			prodArg();
 			prodListaArgLinha();
@@ -226,7 +243,7 @@ public class Sintatico {
 	}
 	
 	private void prodListaArgLinha() {
-		if(isClasseEsperada(Tag.SMB_VIRGULA)){
+		if(isTokenEsperado(Tag.SMB_VIRGULA)){
 			if(!eat(Tag.SMB_VIRGULA)){
 				erroSintatico("Esperado ',', encontrado '" + token.getLexema() + "'");
 			} else
@@ -235,8 +252,8 @@ public class Sintatico {
 	}
 
 	private void prodArg(){
-		if(isClasseEsperada(Tag.KW_BOOL) || isClasseEsperada(Tag.KW_INTEGER) || isClasseEsperada(Tag.KW_STRING) || 
-		   isClasseEsperada(Tag.KW_DOUBLE) || isClasseEsperada(Tag.KW_VOID)) {
+		if(isTokenEsperado(Tag.KW_BOOL) || isTokenEsperado(Tag.KW_INTEGER) || isTokenEsperado(Tag.KW_STRING) || 
+		   isTokenEsperado(Tag.KW_DOUBLE) || isTokenEsperado(Tag.KW_VOID)) {
 			
 			prodTipoMacro();
 			if(!eat(Tag.ID)){
@@ -247,21 +264,21 @@ public class Sintatico {
 	}
 
 	private void prodTipoMacro() {
-		if(isClasseEsperada(Tag.KW_BOOL) || isClasseEsperada(Tag.KW_INTEGER) || isClasseEsperada(Tag.KW_STRING) || 
-		   isClasseEsperada(Tag.KW_DOUBLE) || isClasseEsperada(Tag.KW_VOID)) {
+		if(isTokenEsperado(Tag.KW_BOOL) || isTokenEsperado(Tag.KW_INTEGER) || isTokenEsperado(Tag.KW_STRING) || 
+		   isTokenEsperado(Tag.KW_DOUBLE) || isTokenEsperado(Tag.KW_VOID)) {
 			prodTipoPrimitivo();
 		} else
 			erroSintatico("Esperado 'bool/integer/String/double/void', encontrado '" + token.getLexema() + "'");
 		
-		if(isClasseEsperada(Tag.SMB_ABRECOL)){
+		if(isTokenEsperado(Tag.SMB_ABRECOL)){
 			prodTipoMacroLinha();
 		}
 	}
 	
 	private void prodTipoMacroLinha(){
-		if(isClasseEsperada(Tag.SMB_ABRECOL)){
+		if(isTokenEsperado(Tag.SMB_ABRECOL)){
 			eat(Tag.SMB_ABRECOL);
-			if(isClasseEsperada(Tag.SMB_FECHACOL)){
+			if(isTokenEsperado(Tag.SMB_FECHACOL)){
 				eat(Tag.SMB_FECHACOL);
 			} else
 				erroSintatico("Esperado ']', encontrado '" + token.getLexema() + "'");
@@ -271,7 +288,7 @@ public class Sintatico {
 	
 	
 	private void prodCmdIf(){
-		if(isClasseEsperada(Tag.KW_IF)){
+		if(isTokenEsperado(Tag.KW_IF)){
 			eat(Tag.KW_IF);
 			
 			if(!eat(Tag.SMB_ABREPAR)){
@@ -288,8 +305,8 @@ public class Sintatico {
 	}
 
 	public void prodFDID() { //pronto
-		if(isClasseEsperada(Tag.KW_BOOL) || isClasseEsperada(Tag.KW_INTEGER) || isClasseEsperada(Tag.KW_STRING) || 
-		   isClasseEsperada(Tag.KW_DOUBLE) || isClasseEsperada(Tag.KW_VOID)){
+		if(isTokenEsperado(Tag.KW_BOOL) || isTokenEsperado(Tag.KW_INTEGER) || isTokenEsperado(Tag.KW_STRING) || 
+		   isTokenEsperado(Tag.KW_DOUBLE) || isTokenEsperado(Tag.KW_VOID)){
 			
 			prodDeclaraID();
 			prodFDID();
@@ -298,8 +315,8 @@ public class Sintatico {
 	}
 	
 	private void prodDeclaraID() { //pronto
-		if(isClasseEsperada(Tag.KW_BOOL) || isClasseEsperada(Tag.KW_INTEGER) || isClasseEsperada(Tag.KW_STRING) || 
-		   isClasseEsperada(Tag.KW_DOUBLE) || isClasseEsperada(Tag.KW_VOID)){
+		if(isTokenEsperado(Tag.KW_BOOL) || isTokenEsperado(Tag.KW_INTEGER) || isTokenEsperado(Tag.KW_STRING) || 
+		   isTokenEsperado(Tag.KW_DOUBLE) || isTokenEsperado(Tag.KW_VOID)){
 			
 			prodTipoMacro();
 			

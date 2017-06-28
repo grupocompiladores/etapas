@@ -18,7 +18,7 @@ public class TS {
 	private HashMap<Token, InfIdentificador> tabelaSimbolos; 
 
 	public TS() {
-		tabelaSimbolos = new HashMap();
+		tabelaSimbolos = new HashMap<>();
 
 		// Inserindo as palavras reservadas
 		Token word;

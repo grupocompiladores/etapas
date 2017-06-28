@@ -5,7 +5,7 @@ package laxer;
  * @author Bernardo Fonseca
  */
 public enum Tag {
-    
+    VAZIA,
     /*
      * FIM DE ARQUIVO
      */
