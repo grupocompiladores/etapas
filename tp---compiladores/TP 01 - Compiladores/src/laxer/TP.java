@@ -6,23 +6,23 @@ import java.util.List;
 
 public class TP {
 	
-	private static HashMap<String,Producao> tabelaPreditiva;
+	private static HashMap<NomeProducao,Producao> tabelaPreditiva;
 	
 	public TP() {
-		tabelaPreditiva = new HashMap<>();
+		//tabelaPreditiva = new HashMap<>();
 		Producao p;
 		
-		p = new Producao("prodPrograma");
+		p = new Producao(NomeProducao.prodPrograma);
 		p.getConjuntoFirst().add(Tag.KW_CLASS);
 		p.getConjuntoFollow().add(Tag.EOF);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		//------------------------------------------
-		p = new Producao("prodClasse");
+		p = new Producao(NomeProducao.prodClasse);
 		p.getConjuntoFirst().add(Tag.KW_CLASS);
 		p.getConjuntoFollow().add(Tag.EOF);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		//------------------------------------------
-		p = new Producao("prodDeclaraID");
+		p = new Producao(NomeProducao.prodDeclaraID);
 		p.getConjuntoFirst().add(Tag.KW_BOOL);
 		p.getConjuntoFirst().add(Tag.KW_INTEGER);
 		p.getConjuntoFirst().add(Tag.KW_STRING);
@@ -41,27 +41,27 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
 		p.getConjuntoFollow().add(Tag.KW_END);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		//------------------------------------------
-		p = new Producao("prodListaFuncao");
+		p = new Producao(NomeProducao.prodListaFuncao);
 		p.getConjuntoFirst().add(Tag.KW_DEF);
 		p.getConjuntoFirst().add(Tag.VAZIA);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		//------------------------------------------
-		p = new Producao("prodListaFuncaoLinha");
+		p = new Producao(NomeProducao.prodListaFuncaoLinha);
 		p.getConjuntoFirst().add(Tag.KW_DEF);
 		p.getConjuntoFirst().add(Tag.VAZIA);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		//------------------------------------------
-		p = new Producao("prodFuncao");
+		p = new Producao(NomeProducao.prodFuncao);
 		p.getConjuntoFirst().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		//------------------------------------------
-		p = new Producao("prodFDID");
+		p = new Producao(NomeProducao.prodFDID);
 		p.getConjuntoFirst().add(Tag.KW_BOOL);
 		p.getConjuntoFirst().add(Tag.KW_INTEGER);
 		p.getConjuntoFirst().add(Tag.KW_STRING);
@@ -76,9 +76,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
 		p.getConjuntoFollow().add(Tag.KW_END);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		//------------------------------------------
-		p = new Producao("prodListaArg");
+		p = new Producao(NomeProducao.prodListaArg);
 		p.getConjuntoFirst().add(Tag.KW_BOOL);
 		p.getConjuntoFirst().add(Tag.KW_INTEGER);
 		p.getConjuntoFirst().add(Tag.KW_STRING);
@@ -86,15 +86,15 @@ public class TP {
 		p.getConjuntoFirst().add(Tag.KW_VOID);
 		p.getConjuntoFirst().add(Tag.VAZIA);
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		//------------------------------------------
-		p = new Producao("prodListaArgLinha");
+		p = new Producao(NomeProducao.prodListaArgLinha);
 		p.getConjuntoFirst().add(Tag.SMB_VIRGULA);
 		p.getConjuntoFirst().add(Tag.VAZIA);
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		//------------------------------------------
-		p = new Producao("prodArg");
+		p = new Producao(NomeProducao.prodArg);
 		p.getConjuntoFirst().add(Tag.KW_BOOL);
 		p.getConjuntoFirst().add(Tag.KW_INTEGER);
 		p.getConjuntoFirst().add(Tag.KW_STRING);
@@ -102,35 +102,35 @@ public class TP {
 		p.getConjuntoFirst().add(Tag.KW_VOID);
 		p.getConjuntoFollow().add(Tag.SMB_VIRGULA);
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		//------------------------------------------
-		p = new Producao("prodRetorno");
+		p = new Producao(NomeProducao.prodRetorno);
 		p.getConjuntoFirst().add(Tag.KW_RETURN);
 		p.getConjuntoFirst().add(Tag.VAZIA);
 		p.getConjuntoFollow().add(Tag.KW_END);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		//------------------------------------------
-		p = new Producao("prodMain");
+		p = new Producao(NomeProducao.prodMain);
 		p.getConjuntoFirst().add(Tag.KW_DEFSTATIC);
 		p.getConjuntoFollow().add(Tag.KW_END);
-		tabelaPreditiva.put(p.getNomeProducao(), p);		
+		tabelaPreditiva.put(p.getNome(), p);		
 		//------------------------------------------
-		p = new Producao("prodTipoMacro");
+		p = new Producao(NomeProducao.prodTipoMacro);
 		p.getConjuntoFirst().add(Tag.KW_BOOL);
 		p.getConjuntoFirst().add(Tag.KW_INTEGER);
 		p.getConjuntoFirst().add(Tag.KW_STRING);
 		p.getConjuntoFirst().add(Tag.KW_DOUBLE);
 		p.getConjuntoFirst().add(Tag.KW_VOID);
 		p.getConjuntoFollow().add(Tag.ID);
-		tabelaPreditiva.put(p.getNomeProducao(), p);		
+		tabelaPreditiva.put(p.getNome(), p);		
 				
-		p = new Producao("prodTipoMacroLinha");
+		p = new Producao(NomeProducao.prodTipoMacroLinha);
 		p.getConjuntoFirst().add(Tag.SMB_ABRECOL);
 		p.getConjuntoFirst().add(Tag.VAZIA);
 		p.getConjuntoFollow().add(Tag.ID);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodTipoPrimitivo");
+		p = new Producao(NomeProducao.prodTipoPrimitivo);
 		p.getConjuntoFirst().add(Tag.KW_BOOL);
 		p.getConjuntoFirst().add(Tag.KW_INTEGER);
 		p.getConjuntoFirst().add(Tag.KW_STRING);
@@ -138,9 +138,9 @@ public class TP {
 		p.getConjuntoFirst().add(Tag.KW_VOID);
 		p.getConjuntoFollow().add(Tag.SMB_ABRECOL);
 		p.getConjuntoFollow().add(Tag.ID);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodListaCmd");
+		p = new Producao(NomeProducao.prodListaCmd);
 		p.getConjuntoFirst().add(Tag.KW_IF);
 		p.getConjuntoFirst().add(Tag.KW_WHILE);
 		p.getConjuntoFirst().add(Tag.ID);
@@ -152,9 +152,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.KW_ELSE);
 		p.getConjuntoFollow().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodListaCmdLinha");
+		p = new Producao(NomeProducao.prodListaCmdLinha);
 		p.getConjuntoFirst().add(Tag.KW_IF);
 		p.getConjuntoFirst().add(Tag.KW_WHILE);
 		p.getConjuntoFirst().add(Tag.ID);
@@ -166,9 +166,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.KW_ELSE);
 		p.getConjuntoFollow().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodCmd");
+		p = new Producao(NomeProducao.prodCmd);
 		p.getConjuntoFirst().add(Tag.KW_IF);
 		p.getConjuntoFirst().add(Tag.KW_WHILE);
 		p.getConjuntoFirst().add(Tag.ID);
@@ -184,9 +184,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.KW_ELSE);
 		p.getConjuntoFollow().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodCmdIf");
+		p = new Producao(NomeProducao.prodCmdIf);
 		p.getConjuntoFirst().add(Tag.KW_IF);
 		p.getConjuntoFollow().add(Tag.KW_IF);
 		p.getConjuntoFollow().add(Tag.KW_WHILE);
@@ -198,10 +198,10 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.KW_ELSE);
 		p.getConjuntoFollow().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 	
-		p = new Producao("prodCmdIfLinha");
-		p.getConjuntoFirst().add(Tag.KW_END);
+		p = new Producao(NomeProducao.prodCmdIfLinha);
+		p.getConjuntoFirst().add(Tag.KW_END);	
 		p.getConjuntoFirst().add(Tag.KW_ELSE);
 		p.getConjuntoFollow().add(Tag.KW_IF);
 		p.getConjuntoFollow().add(Tag.KW_WHILE);
@@ -213,9 +213,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.KW_ELSE);
 		p.getConjuntoFollow().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodCmdWhile");
+		p = new Producao(NomeProducao.prodCmdWhile);
 		p.getConjuntoFirst().add(Tag.KW_WHILE);
 		p.getConjuntoFollow().add(Tag.KW_IF);
 		p.getConjuntoFollow().add(Tag.KW_WHILE);
@@ -227,9 +227,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.KW_ELSE);
 		p.getConjuntoFollow().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodCmdWrite");
+		p = new Producao(NomeProducao.prodCmdWrite);
 		p.getConjuntoFirst().add(Tag.KW_WRITE);
 		p.getConjuntoFollow().add(Tag.KW_IF);
 		p.getConjuntoFollow().add(Tag.KW_WHILE);
@@ -241,9 +241,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.KW_ELSE);
 		p.getConjuntoFollow().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodCmdWriteLn");
+		p = new Producao(NomeProducao.prodCmdWriteLn);
 		p.getConjuntoFirst().add(Tag.KW_WRITELN);
 		p.getConjuntoFollow().add(Tag.KW_IF);
 		p.getConjuntoFollow().add(Tag.KW_WHILE);
@@ -255,9 +255,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.KW_ELSE);
 		p.getConjuntoFollow().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodCmdLinha");
+		p = new Producao(NomeProducao.prodCmdLinha);
 		p.getConjuntoFirst().add(Tag.ID);
 		p.getConjuntoFollow().add(Tag.KW_IF);
 		p.getConjuntoFollow().add(Tag.KW_WHILE);
@@ -269,9 +269,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.KW_ELSE);
 		p.getConjuntoFollow().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodCmdDuasLinhas");
+		p = new Producao(NomeProducao.prodCmdDuasLinhas);
 		p.getConjuntoFirst().add(Tag.SMB_IGUAL);
 		p.getConjuntoFirst().add(Tag.SMB_ABRECOL);
 		p.getConjuntoFirst().add(Tag.SMB_ABREPAR);
@@ -285,9 +285,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.KW_ELSE);
 		p.getConjuntoFollow().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodCmdAtribuiLinha");
+		p = new Producao(NomeProducao.prodCmdAtribuiLinha);
 		p.getConjuntoFirst().add(Tag.SMB_IGUAL);
 		p.getConjuntoFirst().add(Tag.SMB_ABRECOL);
 		p.getConjuntoFollow().add(Tag.KW_IF);
@@ -300,15 +300,15 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.KW_ELSE);
 		p.getConjuntoFollow().add(Tag.KW_DEF);
 		p.getConjuntoFollow().add(Tag.KW_DEFSTATIC);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodFexp");
+		p = new Producao(NomeProducao.prodFexp);
 		p.getConjuntoFirst().add(Tag.SMB_VIRGULA);
 		p.getConjuntoFirst().add(Tag.VAZIA);
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodFexp2");
+		p = new Producao(NomeProducao.prodFexp2);
 		p.getConjuntoFirst().add(Tag.ID);
 		p.getConjuntoFirst().add(Tag.CONSTINTEGER);
 		p.getConjuntoFirst().add(Tag.CONSTDOUBLE);
@@ -320,9 +320,9 @@ public class TP {
 		p.getConjuntoFirst().add(Tag.SMB_ABREPAR);
 		p.getConjuntoFirst().add(Tag.VAZIA);
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodExpressao");
+		p = new Producao(NomeProducao.prodExpressao);
 		p.getConjuntoFirst().add(Tag.ID);
 		p.getConjuntoFirst().add(Tag.CONSTINTEGER);
 		p.getConjuntoFirst().add(Tag.CONSTDOUBLE);
@@ -348,9 +348,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
 		p.getConjuntoFollow().add(Tag.SMB_FECHACOL);
 		p.getConjuntoFollow().add(Tag.SMB_VIRGULA);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodExpressaoLinha");
+		p = new Producao(NomeProducao.prodExpressaoLinha);
 		p.getConjuntoFirst().add(Tag.KW_OR);
 		p.getConjuntoFirst().add(Tag.KW_AND);
 		p.getConjuntoFirst().add(Tag.VAZIA);
@@ -370,9 +370,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
 		p.getConjuntoFollow().add(Tag.SMB_FECHACOL);
 		p.getConjuntoFollow().add(Tag.SMB_VIRGULA);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodExpressao1");
+		p = new Producao(NomeProducao.prodExpressao1);
 		p.getConjuntoFirst().add(Tag.ID);
 		p.getConjuntoFirst().add(Tag.CONSTINTEGER);
 		p.getConjuntoFirst().add(Tag.CONSTDOUBLE);
@@ -398,9 +398,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
 		p.getConjuntoFollow().add(Tag.SMB_FECHACOL);
 		p.getConjuntoFollow().add(Tag.SMB_VIRGULA);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodExpressao1Linha");
+		p = new Producao(NomeProducao.prodExpressao1Linha);
 		p.getConjuntoFirst().add(Tag.RELOP_LT);
 		p.getConjuntoFirst().add(Tag.RELOP_LE);
 		p.getConjuntoFirst().add(Tag.RELOP_GT);
@@ -424,9 +424,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
 		p.getConjuntoFollow().add(Tag.SMB_FECHACOL);
 		p.getConjuntoFollow().add(Tag.SMB_VIRGULA);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodExpressao2");
+		p = new Producao(NomeProducao.prodExpressao2);
 		p.getConjuntoFirst().add(Tag.ID);
 		p.getConjuntoFirst().add(Tag.CONSTINTEGER);
 		p.getConjuntoFirst().add(Tag.CONSTDOUBLE);
@@ -452,9 +452,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
 		p.getConjuntoFollow().add(Tag.SMB_FECHACOL);
 		p.getConjuntoFollow().add(Tag.SMB_VIRGULA);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodExpressao2Linha");
+		p = new Producao(NomeProducao.prodExpressao2Linha);
 		p.getConjuntoFirst().add(Tag.OPUNARIO); // - OU !
 		p.getConjuntoFirst().add(Tag.VAZIA);
 		p.getConjuntoFollow().add(Tag.RELOP_MU);
@@ -473,9 +473,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
 		p.getConjuntoFollow().add(Tag.SMB_FECHACOL);
 		p.getConjuntoFollow().add(Tag.SMB_VIRGULA);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodExpressao3");
+		p = new Producao(NomeProducao.prodExpressao3);
 		p.getConjuntoFirst().add(Tag.ID);
 		p.getConjuntoFirst().add(Tag.CONSTINTEGER);
 		p.getConjuntoFirst().add(Tag.CONSTDOUBLE);
@@ -501,9 +501,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
 		p.getConjuntoFollow().add(Tag.SMB_FECHACOL);
 		p.getConjuntoFollow().add(Tag.SMB_VIRGULA);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodExpressao3Linha");
+		p = new Producao(NomeProducao.prodExpressao3Linha);
 		p.getConjuntoFirst().add(Tag.VAZIA);
 		p.getConjuntoFirst().add(Tag.RELOP_DI);
 		p.getConjuntoFirst().add(Tag.RELOP_MU);
@@ -523,9 +523,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
 		p.getConjuntoFollow().add(Tag.SMB_FECHACOL);
 		p.getConjuntoFollow().add(Tag.SMB_VIRGULA);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 			
-		p = new Producao("prodExpressao4");
+		p = new Producao(NomeProducao.prodExpressao4);
 		p.getConjuntoFirst().add(Tag.ID);
 		p.getConjuntoFirst().add(Tag.CONSTINTEGER);
 		p.getConjuntoFirst().add(Tag.CONSTDOUBLE);
@@ -551,9 +551,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
 		p.getConjuntoFollow().add(Tag.SMB_FECHACOL);
 		p.getConjuntoFollow().add(Tag.SMB_VIRGULA);
-		tabelaPreditiva.put(p.getNomeProducao(), p);	
+		tabelaPreditiva.put(p.getNome(), p);	
 		
-		p = new Producao("prodExpressao4Linha");
+		p = new Producao(NomeProducao.prodExpressao4Linha);
 		p.getConjuntoFirst().add(Tag.SMB_ABRECOL);
 		p.getConjuntoFirst().add(Tag.SMB_ABREPAR);
 		p.getConjuntoFirst().add(Tag.VAZIA);
@@ -573,9 +573,9 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.SMB_FECHAPAR);
 		p.getConjuntoFollow().add(Tag.SMB_FECHACOL);
 		p.getConjuntoFollow().add(Tag.SMB_VIRGULA);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
-		p = new Producao("prodOpUnario");
+		p = new Producao(NomeProducao.prodOpUnario);
 		p.getConjuntoFirst().add(Tag.OPUNARIO);
 		p.getConjuntoFollow().add(Tag.ID);
 		p.getConjuntoFollow().add(Tag.CONSTINTEGER);
@@ -586,35 +586,35 @@ public class TP {
 		p.getConjuntoFollow().add(Tag.KW_VECTOR);
 		p.getConjuntoFollow().add(Tag.OPUNARIO);
 		p.getConjuntoFollow().add(Tag.SMB_ABREPAR);
-		tabelaPreditiva.put(p.getNomeProducao(), p);
+		tabelaPreditiva.put(p.getNome(), p);
 		
 	}
 	
-
+	public static boolean ifFirst(NomeProducao nome, Tag t){
+		return true;
+	}
+	
+	public static boolean isFollow(NomeProducao nome, Tag t){
+		return false;
+	}
 	public static void main(String[] args) {
 		List<Producao> lista = new ArrayList<>();
 		Producao p;
 		
-		p = new Producao("prodClasse");
+		p = new Producao(NomeProducao.prodClasse);
 		p.getConjuntoFirst().add(Tag.CONSTDOUBLE);
 		
-		System.out.println(p.getNomeProducao());
-		System.out.println(p.getConjuntoFirst().contains(Tag.CONSTDOUBLE));
-		
-		p = new Producao("prodOutra");
-		p.getConjuntoFirst().add(Tag.CONSTSTRING);
-		
-		System.out.println(p.getNomeProducao());
-		System.out.println(p.getConjuntoFirst().contains(Tag.CONSTDOUBLE));
+		System.out.println(p.getNome());
+		System.out.println(p.getConjuntoFirst().contains(Tag.CONSTINTEGER));
 		
 	}
 	
-	public static HashMap<String, Producao> getTabelaPreditiva() {
+	public static HashMap<NomeProducao, Producao> getTabelaPreditiva() {
 		return tabelaPreditiva;
 	}
 
 
-	public static void setTabelaPreditiva(HashMap<String, Producao> tabelaPreditiva) {
+	public static void setTabelaPreditiva(HashMap<NomeProducao, Producao> tabelaPreditiva) {
 		TP.tabelaPreditiva = tabelaPreditiva;
 	}
 	

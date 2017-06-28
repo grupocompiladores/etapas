@@ -1,5 +1,7 @@
 package laxer;
 
+import java.security.GeneralSecurityException;
+
 /**
  *
  * @author gustavo
@@ -19,6 +21,7 @@ public class Sintatico {
 	private final Lexico lexico;
 	private Token token;
 	private int errosSintaticos;
+	
 	
 	public static final int MAX_ERROS = 5;
 	
@@ -73,38 +76,7 @@ public class Sintatico {
 
 	//-------------------------------------PRODUCOES COMEÇAM AQUI-------------------------------------------------
 	public void prodPrograma(){
-		advance();
-		
-//		if(token.getClasse() == TP.getFirst("prodClasse")){
-//			prodClasse();
-//		} else {
-//			while(errosSintaticos <= 5){
-//				erroSintatico("esperado 'class', veio " + token.getLexema());
-//				errosSintaticos++;
-//				
-//				if(token.getClasse() == TP.getFollow("prodClasse")){
-//					if( ! produzVazio("prodClasse")){
-//						synch(); //reporto erro pois deveria ter entrado nessa produção.
-//					}	
-//				}
-//			}
-//		}
-		
-		
-//		while(errosSintaticos <= MAX_ERROS) {
-//			advance();
-//			
-//			if(isTokenEsperado(Tag.KW_CLASS)){
-//				prodClasse();
-//				if(!eat(Tag.EOF)){
-//					erroSintatico("Esperado 'fim de arquivo', encontrado '" + token.getLexema() + "'");
-//				}
-//				break;
-//			} else {
-//				erroSintatico("Esperado 'class', encontrado '" + token.getLexema() + "'");
-//				errosSintaticos++;
-//			}
-//		}
+		 
 	}
 	
 	public void prodClasse() {
@@ -335,6 +307,18 @@ public class Sintatico {
 		if(!eat(Tag.OPUNARIO)){
 			erroSintatico("Esperado '! ou -', porem encontrado '" + token.getLexema() + "'");
 		}
+	}
+	
+	public static void main(String[] args) {
+		TP tabela = new TP();
+		
+		Producao p = TP.getTabelaPreditiva().get(NomeProducao.prodCmd);
+		
+		System.out.println(p.getNome());
+
+		
+		
+		
 	}
 	
 	

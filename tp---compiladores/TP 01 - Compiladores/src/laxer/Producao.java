@@ -5,23 +5,23 @@ import java.util.List;
 
 public class Producao {
 	
-	private String nomeProducao;
+	private NomeProducao nome;
 	private List<Tag> conjuntoFirst;
 	private List<Tag> conjuntoFollow;
 	
 	
-	public Producao(String nomeProducao){
-		this.nomeProducao = nomeProducao;
+	public Producao(NomeProducao nome){
+		this.nome = nome;
 		conjuntoFirst = new ArrayList<>();
 		conjuntoFollow = new ArrayList<>();
 	}
 
-	public String getNomeProducao() {
-		return nomeProducao;
+	public NomeProducao getNome() {
+		return nome;
 	}
 
-	public void setNomeProducao(String nomeProducao) {
-		this.nomeProducao = nomeProducao;
+	public void setNomeProducao(NomeProducao nome) {
+		this.nome = nome;
 	}
 
 	public List<Tag> getConjuntoFirst() {
