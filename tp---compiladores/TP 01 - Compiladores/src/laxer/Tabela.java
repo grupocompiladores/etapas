@@ -593,23 +593,7 @@ public class Tabela {
 		tabela.put(p.getNome(), p);
 	}
 
-	public boolean ifFirst(NomeProducao nome, Tag t) {
-		Producao p = tabela.get(nome);
-		
-		return ( p.getConjuntoFirst().contains(t) );
-	}
-
-	public boolean isFollow(NomeProducao nome, Tag t) {
-		Producao p = tabela.get(nome);
-		
-		return ( p.getConjuntoFollow().contains(t) );
-	}
-
-	public boolean verificaProducaoVazia(NomeProducao nome, Tag t){
-		Producao p = tabela.get(nome);
-		
-		return ( p.getConjuntoFirst().contains(Tag.VAZIA));
-	}
+	
 
 	public HashMap<NomeProducao, Producao> getTabela() {
 		return tabela;

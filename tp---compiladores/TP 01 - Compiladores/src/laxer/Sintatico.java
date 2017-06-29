@@ -78,13 +78,37 @@ public class Sintatico {
 		return token.getClasse() == classe;
 	}
 
+	public boolean isFirst(NomeProducao nome, Tag t) {
+		Producao p = tabela.getTabela().get(nome);
+		
+		return ( p.getConjuntoFirst().contains(t) );
+	}
+
+	public boolean isFollow(NomeProducao nome, Tag t) {
+		Producao p = tabela.getTabela().get(nome);
+		
+		return ( p.getConjuntoFollow().contains(t) );
+	}
+
+	public boolean verificaProducaoVazia(NomeProducao nome){
+		Producao p = tabela.getTabela().get(nome);
+		
+		return ( p.getConjuntoFirst().contains(Tag.VAZIA));
+	}
+	
 	//-------------------------------------PRODUCOES COMEÇAM AQUI-------------------------------------------------
 	public void prodPrograma(){
 		 advance();
-		 if(isTokenEsperado(Tag.KW_CLASS)) {
+		 if(isFirst(NomeProducao.prodClasse, token.getClasse())) { //veio o token correto para a producao
 			 prodClasse();
+			 if(!eat(Tag.EOF)){ //consome EOF.
+				 erroSintatico("Esperado 'fim de arquivo', encontrado '" + token.getLexema() + "'");
+			 }
 		 } else {
-			 
+			 erroSintatico("Esperado 'class', encontrado '" + token.getLexema() + "'");
+			 errosSintaticos++;
+			 if(errosSintaticos <= 5)
+				 prodPrograma();
 		 }
 	}
 	
@@ -97,16 +121,19 @@ public class Sintatico {
 		}
 		if(!eat(Tag.SMB_DOISPONTOS)){
 			erroSintatico("Esperado ':', encontrado '" + token.getLexema() + "'");
-		}
-		prodListaFuncao();
-		prodMain();
+		} 
 		
-		if(!eat(Tag.KW_END)){
-			erroSintatico("Esperado 'end', encontrado '" + token.getLexema() + "'");
+		if(isFirst(NomeProducao.prodListaFuncao, token.getClasse())){
+			prodListaFuncao();
+		} else{
+			if(!verificaProducaoVazia(NomeProducao.prodListaFuncao)){
+				//avançar até encontrar o first ou follow.
+			}
 		}
-		if(!eat(Tag.SMB_PONTO)){
-			erroSintatico("Esperado '.', encontrado '" + token.getLexema() + "'");
-		}
+		
+		
+		
+		
 		
 	}
 	
