@@ -2,6 +2,8 @@ package laxer;
 
 import java.security.GeneralSecurityException;
 
+import javax.sound.midi.Soundbank;
+
 /**
  *
  * @author gustavo
@@ -21,6 +23,7 @@ public class Sintatico {
 	private final Lexico lexico;
 	private Token token;
 	private int errosSintaticos;
+	private Tabela tabela;
 	
 	
 	public static final int MAX_ERROS = 5;
@@ -28,6 +31,7 @@ public class Sintatico {
 	public Sintatico(Lexico lexico) {
 		this.errosSintaticos = 0;
 		this.lexico = lexico;
+		this.tabela = Singleton.getInstance();
 	}
 
 	// Fecha os arquivos de entrada e de tokens
@@ -76,7 +80,12 @@ public class Sintatico {
 
 	//-------------------------------------PRODUCOES COMEÇAM AQUI-------------------------------------------------
 	public void prodPrograma(){
-		 
+		 advance();
+		 if(isTokenEsperado(Tag.KW_CLASS)) {
+			 prodClasse();
+		 } else {
+			 
+		 }
 	}
 	
 	public void prodClasse() {
@@ -310,13 +319,6 @@ public class Sintatico {
 	}
 	
 	public static void main(String[] args) {
-		TP tabela = new TP();
-		
-		Producao p = TP.getTabelaPreditiva().get(NomeProducao.prodCmd);
-		
-		System.out.println(p.getNome());
-
-		
 		
 		
 	}
