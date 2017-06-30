@@ -1,1 +1,7 @@
-clao id class
+class id : 
+	def boola [] ID () : end; L 1.23 A
+	
+	defstatic void main (String [] ID) : end;
+
+
+end .
