@@ -1,6 +1,6 @@
 class TestePrograma : 
 
-     void testeFuncao123(): String x;
+    def void testeFuncao123(): String x;
         integer varUm;
         double x;
         double y;
